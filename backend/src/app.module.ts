@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { CsvBullModule } from './csv-bull/csv-bull.module';
 import { BullModule } from '@nestjs/bull';
+import { LeadsModule } from './leads/leads.module';
 
 @Module({
   imports: [ConfigModule.forRoot(), BullModule.forRoot({
@@ -12,7 +13,7 @@ import { BullModule } from '@nestjs/bull';
       port: 6379,
       password: '1234'
     }
-  }), CsvBullModule],
+  }), CsvBullModule, LeadsModule],
   controllers: [AppController],
   providers: [AppService],
 })

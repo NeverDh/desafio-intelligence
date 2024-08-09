@@ -5,12 +5,13 @@ import { Queue } from 'bull';
 @Injectable()
 export class CreateCSVProducer {
   constructor(@InjectQueue('create-csv') private createCSVQueue: Queue) {}
-  async createdCSV() {
+
+  async createdCSVFromBuffer(file: Buffer) {
     await this.createCSVQueue.add({
-      title: 'CSV to JSON',
+      file: file.toString('utf-8'), // Converter o buffer para string
     });
     return {
-      message: 'Created CSV Producer',
+      message: 'Arquivo adicionado à fila para processamento no metoto post.',
     };
   }
 }
