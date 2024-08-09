@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CsvBullModule } from './csv-bull/csv-bull.module';
 import { BullModule } from '@nestjs/bull';
 import { LeadsModule } from './leads/leads.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [ConfigModule.forRoot(), BullModule.forRoot({
@@ -13,7 +14,7 @@ import { LeadsModule } from './leads/leads.module';
       port: 6379,
       password: '1234'
     }
-  }), CsvBullModule, LeadsModule],
+  }), CsvBullModule, LeadsModule, PrismaModule],
   controllers: [AppController],
   providers: [AppService],
 })

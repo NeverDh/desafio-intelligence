@@ -19,3 +19,12 @@ model Leads {
   @@map("leads")
 }
 
+model Users {
+  id String @id @default(uuid())
+  nome String
+  login String
+  senha String 
+  data_criacao DateTime @default(now())
+  data_atualizacao DateTime @default(now())
+  @@map("users")
+}

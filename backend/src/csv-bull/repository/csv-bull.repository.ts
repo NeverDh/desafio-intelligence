@@ -1,5 +1,5 @@
-import { PrismaService } from 'src/database/client/prisma.service';
-import { LeadsDTO } from './dto/csv-bull.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { LeadsDTO } from '../dto/csv-bull.dto';
 
 export class CreateCSVRepository {
   constructor(private readonly prisma: PrismaService) {}

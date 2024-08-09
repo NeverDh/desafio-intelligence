@@ -39,6 +39,7 @@ export class UpdateLeadDto {
   @IsOptional()
   nacionalidade?: string;
 
+
   @Validate(AtLeastOneFieldRequired, {
     message:
       'Pelo menos um dos campos "nome", "data_nascimento", "genero" ou "nacionalidade" deve ser preenchido.',

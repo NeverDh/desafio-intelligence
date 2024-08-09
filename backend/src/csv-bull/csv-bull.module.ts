@@ -3,8 +3,8 @@ import { CsvBullController } from './csv-bull.controller';
 import { CreateCSVProducer } from './csv-bull.producer';
 import { BullModule } from '@nestjs/bull';
 import { CreateCSVConsumer } from './csv-bull.consumer';
-import { PrismaService } from 'src/database/client/prisma.service';
-import { CreateCSVRepository } from './csv-bull.repository';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { CreateCSVRepository } from './repository/csv-bull.repository';
 
 @Module({
   imports: [
