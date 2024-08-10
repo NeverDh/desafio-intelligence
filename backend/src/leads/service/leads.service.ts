@@ -8,6 +8,7 @@ import { LeadsRequestHandlerService } from './leads.request-handler.service';
 
 @Injectable()
 export class LeadsService {
+  
   constructor(
     private prisma: PrismaService,
     private readonly leadRequestHandlerService: LeadsRequestHandlerService,
@@ -22,9 +23,15 @@ export class LeadsService {
     const where = this.leadRequestHandlerService.buildWhere(filter || {});
 
     return this.prisma.leads.findMany({
-      ...(skip !== undefined ? { skip: skip * (take ?? 25) } : {}),
+      ...(skip !== undefined ? { skip: skip * (take ?? 10) } : {}),
       ...(take !== undefined ? { take } : {}),
       ...(Object.keys(where).length > 0 ? { where } : {}),
+    });
+  }
+
+  findAllQuery() {
+    return this.prisma.leads.aggregate({
+      _count: true
     });
   }
 

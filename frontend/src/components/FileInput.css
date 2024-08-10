@@ -1,0 +1,24 @@
+/* FileInput.css */
+.file-input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #007bff;
+    border-radius: 5px;
+    padding: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .file-input-wrapper:hover {
+    background-color: #f8f9fa;
+    border-color: #0056b3;
+  }
+  
+  .file-input {
+    cursor: pointer;
+  }
+  
+  input[type='file'] {
+    cursor: pointer;
+  }

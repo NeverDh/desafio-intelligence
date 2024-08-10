@@ -34,6 +34,12 @@ export class LeadsController {
     return this.leadsService.findAll(filter);
   }
 
+  @Get('/count')
+  findAllNumber() {
+    return this.leadsService.findAllQuery();
+  }
+
+
   @Get(':id')
   findById(@Param('id') id: string) {
     return this.leadsService.findById(id);
