@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Form, Dropdown, Button, Col, Row, Pagination, InputGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Funnel, Download  } from 'react-bootstrap-icons'; // Importando ícone de funil
+import { Funnel } from 'react-bootstrap-icons'; // Importando ícone de funil
 import axios from 'axios';
-import Papa from 'papaparse';
 
 const ViewData = () => {
   const [filters, setFilters] = useState({
@@ -139,27 +138,6 @@ const ViewData = () => {
     
   };
 
-  // Define the pages to show in pagination
-  const getPaginationPages = () => {
-    const pages = [];
-
-    if (currentPage > 1) pages.push(currentPage - 1);
-    pages.push(currentPage);
-    if (currentPage < totalPages) pages.push(currentPage + 1);
-
-    return pages;
-  };
-
-  const downloadCSV = () => {
-    const csv = Papa.unparse(filteredData);
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.setAttribute('href', url);
-    link.setAttribute('download', 'data.csv');
-    link.click();
-  };
-
   return (
     <div className="container mt-5">
       <Row className="mb-3">
@@ -205,21 +183,14 @@ const ViewData = () => {
       </Row>
 
       <Row className="mb-3">
-        <Col xs={12} className='d-flex justify-content-between'>
-          <InputGroup className="mb-30" style={{width: '50%'}}>
+        <Col xs={12}>
+          <InputGroup className="mb-3">
             <Form.Control
               placeholder="Digite para filtrar"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </InputGroup>
-          <Button
-            variant="outline-success"
-            onClick={downloadCSV}
-            className="w-25"
-          >
-            <Download /> Exportar CSV
-          </Button>
         </Col>
       </Row>
 
@@ -256,13 +227,13 @@ const ViewData = () => {
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
           />
-          {getPaginationPages().map((page) => (
+          {[...Array(totalPages).keys()].map((page) => (
             <Pagination.Item
-              key={page}
-              active={page === currentPage}
-              onClick={() => handlePageChange(page)}
+              key={page + 1}
+              active={page + 1 === currentPage}
+              onClick={() => handlePageChange(page + 1)}
             >
-              {page}
+              {page + 1}
             </Pagination.Item>
           ))}
           <Pagination.Next
