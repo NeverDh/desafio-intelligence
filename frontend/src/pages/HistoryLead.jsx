@@ -36,7 +36,7 @@ const ViewData = () => {
   const navigate = useNavigate();
   const fetchDataCount = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/leads/count');
+      const response = await axios.get('http://localhost:3000/history/count');
       if (response.status === 200) {
         setDataCount(response.data._count || 0);
       }
@@ -48,7 +48,7 @@ const ViewData = () => {
   const fetchData = async (page) => {
     const skip = page - 1;
     try {
-      const response = await axios.get('http://localhost:3000/leads', {
+      const response = await axios.get('http://localhost:3000/history', {
         params: {
           skip,
           take: rowsPerPage,
@@ -164,28 +164,6 @@ const ViewData = () => {
   return (
     <div className="container mt-5 d-flex justify-content-center align-itens-center flex-column">
       <Row className="mb-3">
-        {['nome', 'data_nascimento', 'genero', 'nacionalidade', 'data_criacao', 'data_atualizacao'].map((filterName) => (
-          <Col xs={12} sm={6} md={4} lg={2} className="mb-2" key={filterName}>
-            <Button
-              variant="outline-primary"
-              onClick={() => handleToggleFilters(filterName)}
-              className="w-100"
-            >
-              <Funnel /> {filterName.charAt(0).toUpperCase() + filterName.slice(1).replace('_', ' ')}
-            </Button>
-            <Dropdown show={showFilters[filterName]} className="mt-2">
-              <Dropdown.Menu style={{ minWidth: '200px' }}>
-                <Form.Control
-                  type="text"
-                  placeholder={`Filtrar por ${filterName.charAt(0).toUpperCase() + filterName.slice(1).replace('_', ' ')}`}
-                  name={filterName}
-                  value={filters[filterName]}
-                  onChange={handleFilterChange}
-                />
-              </Dropdown.Menu>
-            </Dropdown>
-          </Col>
-        ))}
         <Col xs={12} sm={6} md={4} lg={2} className="mb-2">
           <Button
             variant="outline-primary"
@@ -205,32 +183,6 @@ const ViewData = () => {
         </Col>
       </Row>
 
-      <Row className="mb-3">
-        <Col xs={12} className='d-flex justify-content-between'>
-          <InputGroup className="mb-30 m-3" style={{width: '50%'}}>
-            <Form.Control
-              placeholder="Digite para filtrar"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </InputGroup>
-          <Button
-            variant="outline-secondary"
-            onClick={() => { navigate('/create-lead') }}
-            className="w-25 m-3"
-          >
-             Criar Lead
-          </Button>
-          <Button
-            variant="outline-success"
-            onClick={downloadCSV}
-            className="w-25 m-3"
-          >
-            <Download /> Exportar CSV
-          </Button>
-        </Col>
-      </Row>
-
       <div className="table-responsive mt-3" style={{ maxHeight: '300px' }}>
         <Table striped bordered hover>
           <thead>
@@ -239,9 +191,10 @@ const ViewData = () => {
               <th>Data de Nascimento</th>
               <th>Gênero</th>
               <th>Nacionalidade</th>
+              <th>Status</th>
               <th>Data de Criação</th>
               <th>Data de Atualização</th>
-              <th>Ações</th>
+              
             </tr>
           </thead>
           <tbody>
@@ -251,16 +204,9 @@ const ViewData = () => {
                 <td>{item.data_nascimento}</td>
                 <td>{item.genero}</td>
                 <td>{item.nacionalidade}</td>
+                <td>{item.status}</td>
                 <td>{item.data_criacao}</td>
                 <td>{item.data_atualizacao}</td>
-                <td>
-                  <Button
-                    variant="outline-primary"
-                    onClick={() => navigate(`/edit-lead/${item.id}`)}
-                  >
-                    <Pencil /> {/* Ícone de editar */}
-                  </Button>
-                </td>
               </tr>
             )) : <tr><td colSpan="6">Nenhum dado encontrado</td></tr>}
           </tbody>

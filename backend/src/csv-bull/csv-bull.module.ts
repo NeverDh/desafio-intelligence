@@ -5,6 +5,7 @@ import { BullModule } from '@nestjs/bull';
 import { CreateCSVConsumer } from './csv-bull.consumer';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCSVRepository } from './repository/csv-bull.repository';
+import { HistoryLeadsService } from 'src/leads/history-leads/history-leads.service';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { CreateCSVRepository } from './repository/csv-bull.repository';
       },
       inject: [PrismaService],
     },
+    HistoryLeadsService
   ],
 })
 export class CsvBullModule {}

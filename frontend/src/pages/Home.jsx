@@ -13,6 +13,14 @@ const Home = () => {
     navigate('/view-data');
   };
 
+  const handleCreateLeads = () => {
+    navigate('/create-lead');
+  };
+
+  const handleHistoryLeads = () => {
+    navigate('/history-lead');
+  };
+
   return (
     <Container className="mt-4">
         
@@ -26,11 +34,26 @@ const Home = () => {
             Upload leads
           </button>
           <button 
-                   className="w-100 btn btn-outline-primary" 
+                   className="w-100 btn mb-3 btn-outline-primary" 
+                      style={{height:'10%'}}
+            onClick={handleCreateLeads}
+          >
+            Criar leads
+          </button>
+          <button 
+                   className="w-100 btn mb-3 btn-outline-primary" 
                       style={{height:'10%'}}
             onClick={handleListLeads}
           >
             Listar leads
+          </button>
+
+          <button 
+                   className="w-100 btn mb-3 btn-outline-primary" 
+                      style={{height:'10%'}}
+            onClick={handleHistoryLeads}
+          >
+            Histórico leads
           </button>
         </Col>
       </Row>
