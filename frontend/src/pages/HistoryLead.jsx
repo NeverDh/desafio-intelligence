@@ -7,6 +7,7 @@ import Papa from 'papaparse';
 import { useNavigate } from 'react-router-dom';
 
 const ViewData = () => {
+  const util = require('../utils/index');
   const [filters, setFilters] = useState({
     nome: '',
     data_nascimento: '',
@@ -85,14 +86,6 @@ const ViewData = () => {
   }, [searchQuery, data]);
 
   const totalPages = dataCount > 0 ? Math.ceil(dataCount / rowsPerPage) : 1;
-
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [name]: value,
-    }));
-  };
 
   const handleFilterChangeReturn = (e) => {
     for (const chave in e) {
@@ -201,12 +194,12 @@ const ViewData = () => {
             {filteredData.length > 0 ? filteredData.map((item) => (
               <tr key={item.id}>
                 <td>{item.nome}</td>
-                <td>{item.data_nascimento}</td>
+                <td>{util.formatDate(item.data_nascimento)}</td>
                 <td>{item.genero}</td>
                 <td>{item.nacionalidade}</td>
                 <td>{item.status}</td>
-                <td>{item.data_criacao}</td>
-                <td>{item.data_atualizacao}</td>
+                <td>{util.formatDate(item.data_criacao)}</td>
+                <td>{util.formatDate(item.data_atualizacao)}</td>
               </tr>
             )) : <tr><td colSpan="6">Nenhum dado encontrado</td></tr>}
           </tbody>

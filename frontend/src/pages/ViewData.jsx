@@ -7,6 +7,7 @@ import Papa from 'papaparse';
 import { useNavigate } from 'react-router-dom';
 
 const ViewData = () => {
+  const util = require('../utils/index');
   const [filters, setFilters] = useState({
     nome: '',
     data_nascimento: '',
@@ -248,11 +249,11 @@ const ViewData = () => {
             {filteredData.length > 0 ? filteredData.map((item) => (
               <tr key={item.id}>
                 <td>{item.nome}</td>
-                <td>{item.data_nascimento}</td>
+                <td>{util.formatDate(item.data_nascimento)}</td>
                 <td>{item.genero}</td>
                 <td>{item.nacionalidade}</td>
-                <td>{item.data_criacao}</td>
-                <td>{item.data_atualizacao}</td>
+                <td>{util.formatDate(item.data_criacao)}</td>
+                <td>{util.formatDate(item.data_atualizacao)}</td>
                 <td>
                   <Button
                     variant="outline-primary"

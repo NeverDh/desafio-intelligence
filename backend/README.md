@@ -76,7 +76,7 @@ O Producer publica os itens na fila após validação.
 O Consumer consome os itens da fila e os insere no banco de dados.
 
 Módulo leads
-Este é o módulo principal da aplicação, responsável pelas rotas mais importantes relacionadas aos leads. Dentro dele, existe um submódulo chamado history-leads, que grava todo o histórico de criação e alterações dos leads.
+Este é o módulo principal da aplicação, responsável pelas rotas mais importantes relacionadas aos leads. Dentro dele, existe um submódulo chamado history-leads, que grava todo o histórico de criação e alterações dos leads. Foi implementado a paginação e filtros nesse módulo e no history-leads também foi implementado apenas a paginação.
 
 Módulo prisma
 Utilizamos o Prisma como ORM para facilitar as interações com o banco de dados. O schema Prisma define três models principais que estruturam o banco de dados.
