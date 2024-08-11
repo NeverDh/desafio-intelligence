@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { context } from '../context/AuthPrivateContext';
 
 const Home = () => {
   const navigate = useNavigate();
+  const { authenticated, handleLogout } = useContext(context);
 
   const handleUploadLeads = () => {
     navigate('/upload-csv');
@@ -54,6 +56,14 @@ const Home = () => {
             onClick={handleHistoryLeads}
           >
             Histórico leads
+          </button>
+
+          <button 
+                   className="w-100 btn mb-3 btn-outline-dark" 
+                      style={{height:'10%'}}
+            onClick={handleLogout}
+          >
+            Sair
           </button>
         </Col>
       </Row>

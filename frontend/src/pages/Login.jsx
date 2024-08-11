@@ -1,35 +1,23 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Toast, ToastContainer, Button, Form, Container, Row, Col, Card } from 'react-bootstrap';
-import { context } from '../context/AuthPrivateContext';
-//import { api } from '../apis/login';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { context } from '../context/AuthPrivateContext';
 
 function Login() {
-  // const { handleLogin } = useContext(context);
-  // const navigate = useNavigate();
-
+  const { authenticated, handleLogin } = useContext(context);
   const [formValue, setFormValue] = useState({
     login: '',
     password: ''
   });
   const [showToast, setShowToast] = useState({ show: false, message: '', type: '' });
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    // try {
-    //   const result = await api.loginApi(formValue);
-    //   if (result) {
-    //     setShowToast({ show: true, message: 'Logado com sucesso!', type: 'success' });
-    //     navigate("/home");
-    //   }
-    // } catch (e) {
-    //   setShowToast({ show: true, message: e.message, type: 'error' });
-    // } 
-  };
-
   const onChange = (e) => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault(); // Evita o comportamento padrão de recarregar a página
+    await handleLogin(formValue);
   };
 
   return (
@@ -38,9 +26,8 @@ function Login() {
         <Col md={6} lg={4}>
           <Card className='text-dark rounded-3'>
             <Card.Body className='d-flex flex-column align-items-center'>
-        
               <h4 className="my-4">Login</h4>
-              <Form onSubmit={handleSubmit} className='w-100'>
+              <Form onSubmit={onSubmit} className='w-100'>
                 <Form.Group className='mb-3 text-dark' controlId='login'>
                   <Form.Label className='text-dark'>Login</Form.Label>
                   <Form.Control 
@@ -65,7 +52,7 @@ function Login() {
                 </Form.Group>
                 <Button 
                   type='submit'
-                  variant='outline-light'
+                  variant='outline-dark'
                   className='w-100'
                   disabled={formValue.password.length < 3 || formValue.login.length < 1}
                 >

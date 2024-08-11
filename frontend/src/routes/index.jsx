@@ -2,12 +2,17 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from './router';
+import { AuthPrivateProvider } from '../context/AuthPrivateContext'; 
 
 const RoutesIndex = () => {
   return (
+    
     <Router>
-      <AppRoutes />
-    </Router>
+      <AuthPrivateProvider>
+        <AppRoutes />
+        </AuthPrivateProvider>
+      </Router>
+  
   );
 };
 

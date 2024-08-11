@@ -6,7 +6,7 @@ const process = require('../env');
 export const login = async (body) => {
   try{
       const response = await axiosInstance.post(`${process.env.URL}/auth/login`, body);
-      if (response.status === 200){
+      if (response.status === 201){
         return response.data;
       }
 
